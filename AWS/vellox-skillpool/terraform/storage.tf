@@ -5,7 +5,7 @@
 # 1. Multimedia Storage Bucket
 resource "aws_s3_bucket" "media" {
   bucket        = local.media_bucket_name
-  force_destroy = var.environment == "poc" ? true : false
+  force_destroy = var.force_destroy_buckets
 
   tags = {
     Name = local.media_bucket_name
@@ -51,7 +51,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "media" {
 # 2. Audit & Access Logs Bucket
 resource "aws_s3_bucket" "logs" {
   bucket        = local.logs_bucket_name
-  force_destroy = var.environment == "poc" ? true : false
+  force_destroy = var.force_destroy_buckets
 
   tags = {
     Name = local.logs_bucket_name

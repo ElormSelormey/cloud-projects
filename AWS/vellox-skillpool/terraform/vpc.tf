@@ -130,7 +130,7 @@ locals {
 }
 
 resource "aws_vpc_endpoint" "interfaces" {
-  for_each            = toset(local.interface_services)
+  for_each            = var.enable_interface_endpoints ? toset(local.interface_services) : []
   vpc_id              = aws_vpc.main.id
   service_name        = "com.amazonaws.${local.region}.${each.key}"
   vpc_endpoint_type   = "Interface"

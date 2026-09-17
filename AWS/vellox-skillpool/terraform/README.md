@@ -79,8 +79,39 @@ Inspects the resources marked for destruction in reverse dependency order:
 terraform plan -destroy
 ```
 
-### 6. Deprovision (Teardown)
-Destroys all managed resources cleanly:
+### 6. Full Teardown
+Destroys all managed resources in reverse dependency order automatically:
 ```bash
 terraform destroy
 ```
+
+---
+
+## 🛑 Targeted & Selective Teardown Workflows
+
+Just like the original `skillpool-teardown.sh` script, Terraform supports granular teardown workflows to optimize costs and safeguard data:
+
+### A. Endpoints-Only Teardown (Stop the Meter Between Sessions)
+The 4 VPC interface endpoints account for ~47% of idle POC runtime costs (~$56/mo). You can tear down **only** the interface endpoints without destroying the rest of the VPC, database, or compute:
+
+```bash
+# Option 1: Via variable toggle (Recommended)
+terraform apply -var="enable_interface_endpoints=false"
+
+# Option 2: Via targeted destroy
+terraform destroy -target=aws_vpc_endpoint.interfaces
+```
+
+To bring the endpoints back when resuming work:
+```bash
+terraform apply -var="enable_interface_endpoints=true"
+```
+
+### B. Keep-Data Teardown (Preserve S3 Data & Take Final RDS Snapshot)
+If you want to tear down infrastructure while keeping persistent candidate media and taking an automated snapshot of the MySQL database:
+
+```bash
+terraform destroy -var="skip_final_snapshot=false" -var="force_destroy_buckets=false"
+```
+* **RDS:** A final DB snapshot named `vellox-skillpool-db-final-snapshot` is created before deletion.
+* **S3:** Prevents accidental deletion of non-empty buckets.

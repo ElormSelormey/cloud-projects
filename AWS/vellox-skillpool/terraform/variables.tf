@@ -123,3 +123,25 @@ variable "enable_athena" {
   type        = bool
   default     = true
 }
+
+# -----------------------------------------------------------------------------
+# Teardown & Cost Management Controls (Equivalent to Teardown Script Flags)
+# -----------------------------------------------------------------------------
+
+variable "enable_interface_endpoints" {
+  description = "Enable billable VPC Interface Endpoints. Set to false to tear down only endpoints (saves ~$56/mo) between work sessions (equivalent to --endpoints-only)."
+  type        = bool
+  default     = true
+}
+
+variable "skip_final_snapshot" {
+  description = "Skip final RDS database snapshot on destruction. Set to false to take a final snapshot before teardown (equivalent to --keep-data)."
+  type        = bool
+  default     = true
+}
+
+variable "force_destroy_buckets" {
+  description = "Allow Terraform to delete S3 buckets containing data on teardown. Set to false to safeguard persistent data."
+  type        = bool
+  default     = true
+}

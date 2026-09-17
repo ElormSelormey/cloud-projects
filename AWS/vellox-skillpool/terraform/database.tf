@@ -57,7 +57,8 @@ resource "aws_db_instance" "mysql" {
   storage_encrypted           = true
   multi_az                    = var.db_multi_az
   auto_minor_version_upgrade  = true
-  skip_final_snapshot         = var.environment == "poc" ? true : false
+  skip_final_snapshot         = var.skip_final_snapshot
+  final_snapshot_identifier   = var.skip_final_snapshot ? null : "${var.project}-db-final-snapshot"
   deletion_protection         = var.environment == "poc" ? false : true
 
   tags = {
