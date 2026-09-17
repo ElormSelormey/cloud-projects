@@ -1,0 +1,27 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment variables & secrets
+*.env
+*.env.*
+*.secret
+*.pem
+*.key
+skillpool-state.env
+
+# Logs & temporary runtime files
+*.log
+*.tmp
+*.state
+
+# Terraform & IaC cache (future)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
