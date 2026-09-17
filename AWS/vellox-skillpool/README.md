@@ -127,6 +127,7 @@ To transition from legacy environments with near-zero downtime:
 
 ## 📂 Project Assets
 
+* [`terraform/`](./terraform/README.md) — Declarative Infrastructure as Code (IaC) implementation replacing procedural scripts with automated build and teardown plans.
 * [`SCRIPTS-README.md`](./SCRIPTS-README.md) — Comprehensive guide to the CLI deployment phases, prerequisites, and operational tips.
 * [`skillpool-build.sh`](./skillpool-build.sh) — 12-phase automated idempotent provisioning script using AWS CLI.
 * [`skillpool-teardown.sh`](./skillpool-teardown.sh) — Clean teardown automation supporting reverse-dependency resource destruction.

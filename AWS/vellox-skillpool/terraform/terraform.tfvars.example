@@ -1,0 +1,21 @@
+project              = "vellox-skillpool"
+environment          = "poc"
+aws_region           = "us-east-1"
+bucket_suffix        = "001"
+
+# Database configuration
+db_name              = "skillpool"
+db_username          = "admin"
+db_instance_class    = "db.t4g.micro"
+db_multi_az          = false # Set to true for production high-availability
+
+# Compute configuration
+container_port       = 5000
+task_cpu             = "256" # 0.25 vCPU
+task_memory          = "512" # 0.5 GB
+desired_count        = 1
+
+# Features
+enable_cloudfront    = true
+enable_cloudtrail    = true
+enable_athena        = true
