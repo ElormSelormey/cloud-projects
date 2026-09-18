@@ -23,7 +23,7 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           GITLAB_USERNAME: ${{ secrets.GITLAB_USERNAME || github.actor }}
-          GITLAB_REPOSITORY: ${{ secrets.GITLAB_REPOSITORY || 'gitlab.com/ElormSelormey/cloud-projects.git' }}
+          GITLAB_REPOSITORY: ${{ secrets.GITLAB_REPOSITORY || format('gitlab.com/{0}.git', github.repository) }}
         run: |
           if [ -z "$GITLAB_TOKEN" ]; then
             echo "::error::GITLAB_TOKEN secret is not set in GitHub repository secrets!"
